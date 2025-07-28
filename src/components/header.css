@@ -1,0 +1,38 @@
+/* src/styles/Header.css */
+
+.style {
+  background-color: #343a40;
+  padding: 20px 0;
+  color: white;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.style h1 span {
+  font-size: 28px;
+  font-weight: bold;
+  color: #f8f9fa;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.list li {
+  cursor: pointer;
+  font-size: 16px;
+  color: #adb5bd;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.list li:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
