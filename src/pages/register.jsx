@@ -1,7 +1,6 @@
-// src/pages/Register.jsx
 import React, { useState } from "react";
 import axios from "axios";
-import "../pageStyle/register.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -28,17 +27,92 @@ const Register = () => {
   };
 
   return (
-    <div className="register-page">
-      <h2>Register Owner</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="company_name" placeholder="Company Name" onChange={handleChange} />
-        <input name="owner_name" placeholder="Owner Name" onChange={handleChange} />
-        <input name="phone" placeholder="Phone Number" onChange={handleChange} />
-        <input name="owner_id" placeholder="Owner ID" onChange={handleChange} />
-        <input name="register" placeholder="Register Date" onChange={handleChange} />
-        <input name="product" placeholder="Product Type" onChange={handleChange} />
-        <button type="submit">Register</button>
-      </form>
+    <div className="container mt-5">
+      <div className="card shadow-lg p-4 mx-auto" style={{ maxWidth: "600px" }}>
+        <h3 className="text-center mb-4">Register Owner</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Company Name</label>
+            <input
+              type="text"
+              className="form-control"
+              name="company_name"
+              placeholder="Enter company name"
+              value={form.company_name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Owner Name</label>
+            <input
+              type="text"
+              className="form-control"
+              name="owner_name"
+              placeholder="Enter owner name"
+              value={form.owner_name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Phone Number</label>
+            <input
+              type="tel"
+              className="form-control"
+              name="phone"
+              placeholder="Enter phone number"
+              value={form.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Owner ID</label>
+            <input
+              type="text"
+              className="form-control"
+              name="owner_id"
+              placeholder="Enter owner ID"
+              value={form.owner_id}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Register Date</label>
+            <input
+              type="date"
+              className="form-control"
+              name="register"
+              value={form.register}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Product Type</label>
+            <input
+              type="text"
+              className="form-control"
+              name="product"
+              placeholder="Enter product type"
+              value={form.product}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100">
+            Register Owner
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

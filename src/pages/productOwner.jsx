@@ -1,7 +1,6 @@
-// src/components/ProductOwner.jsx
-import React,{ useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../pageStyle/addOwner.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProductOwner = () => {
   const [formData, setFormData] = useState({
@@ -13,13 +12,13 @@ const ProductOwner = () => {
     register: ''
   });
 
-useEffect(() => {
-  axios.get("http://localhost:5000/api/owner")  // ✅ CORRECTED
-    .then((res) => {
-      console.log("Owners fetched:", res.data.owners);
-    })
-    .catch((err) => console.error("Error fetching owners:", err));
-}, []);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/owner")
+      .then((res) => {
+        console.log("Owners fetched:", res.data.owners);
+      })
+      .catch((err) => console.error("Error fetching owners:", err));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,77 +27,107 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    // You can POST this to backend here using axios
-    try{
-      await axios.post("http://localhost:5000/api/owner/create", formData,{
-      });
-      alert("Owner added successfully");
-    }catch(err){
-      console.error("Error adding Owner:",err);
+    try {
+      await axios.post("http://localhost:5000/api/owner/create", formData);
+      alert("✅ Owner added successfully");
+    } catch (err) {
+      console.error("❌ Error adding Owner:", err);
       alert("Failed to add product");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Product Owner Details</h2>
+    <div className="container mt-5">
+      <div className="card shadow-lg">
+        <div className="card-header bg-primary text-white">
+          <h3 className="mb-0">Add Product Owner</h3>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
 
-      <label>Company Name</label><br />
-      <input
-        type="text"
-        name="company_name"
-        value={formData.company_name}
-        onChange={handleChange}
-        required
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Company Name</label>
+              <input
+                type="text"
+                name="company_name"
+                className="form-control"
+                value={formData.company_name}
+                onChange={handleChange}
+                placeholder="Enter company name"
+                required
+              />
+            </div>
 
-      <label>Owner Name</label><br />
-      <input
-        type="text"
-        name="owner_name"
-        value={formData.owner_name}
-        onChange={handleChange}
-        required
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Owner Name</label>
+              <input
+                type="text"
+                name="owner_name"
+                className="form-control"
+                value={formData.owner_name}
+                onChange={handleChange}
+                placeholder="Enter owner name"
+                required
+              />
+            </div>
 
-      <label>Contact Number</label><br />
-      <input
-        type="text"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        required
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Contact Number</label>
+              <input
+                type="text"
+                name="phone"
+                className="form-control"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter contact number"
+                required
+              />
+            </div>
 
-      <label>Owner ID</label><br />
-      <input
-        type="text"
-        name="owner_id"
-        value={formData.owner_id}
-        onChange={handleChange}
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Owner ID</label>
+              <input
+                type="text"
+                name="owner_id"
+                className="form-control"
+                value={formData.owner_id}
+                onChange={handleChange}
+                placeholder="Enter owner ID"
+              />
+            </div>
 
-      <label>Register Date</label><br />
-      <input
-        type="date"
-        name="register"
-        value={formData.register}
-        onChange={handleChange}
-        required
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Register Date</label>
+              <input
+                type="date"
+                name="register"
+                className="form-control"
+                value={formData.register}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <label>Product</label><br />
-      <input
-        type="text"
-        name="product"
-        value={formData.product}
-        onChange={handleChange}
-        required
-      /><br /><br />
+            <div className="mb-3">
+              <label className="form-label">Product</label>
+              <input
+                type="text"
+                name="product"
+                className="form-control"
+                value={formData.product}
+                onChange={handleChange}
+                placeholder="Enter product name"
+                required
+              />
+            </div>
 
-      <button type="submit">Submit</button>
-    </form>
+            <button type="submit" className="btn btn-success w-100">
+              Submit Owner Details
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,10 +1,7 @@
-// src/pages/AddProduct.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../pageStyle/addProduct.css';
 
 const AddProduct = () => {
-  const [owners, setOwners] = useState([]);
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -18,14 +15,6 @@ const AddProduct = () => {
     owner_id: "",
     image: null,
   });
-
-useEffect(() => {
-  axios.get("http://localhost:5000/api/products")  // ✅ CORRECTED
-    .then((res) => {
-      console.log("Fetched products:", res.data.products);
-    })
-    .catch((err) => console.error("Error fetching products:", err));
-}, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +37,6 @@ useEffect(() => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("✅ Product added successfully");
-      // Optionally reset form here
     } catch (err) {
       console.error("❌ Error adding product:", err);
       alert("Failed to add product");
@@ -56,106 +44,152 @@ useEffect(() => {
   };
 
   return (
-    <div className="add-product-page">
-      <h2>Add Product</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>Product Name</label>
-        <input
-          name="name"
-          value={form.name}
-          placeholder="Product Name"
-          onChange={handleChange}
-          required
-        />
+    <div className="container mt-5">
+      <div className="card shadow p-4">
+        <h2 className="mb-4 text-center">Add New Product</h2>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Product Name</label>
+              <input
+                name="name"
+                className="form-control"
+                placeholder="Enter product name"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label>Price</label>
-        <input
-          name="price"
-          value={form.price}
-          placeholder="Price"
-          onChange={handleChange}
-          required
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Price (₹)</label>
+              <input
+                name="price"
+                className="form-control"
+                placeholder="Enter price"
+                value={form.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label>Quantity</label>
-        <input
-          name="quantity"
-          value={form.quantity}
-          placeholder="Quantity"
-          onChange={handleChange}
-          required
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Quantity</label>
+              <input
+                name="quantity"
+                className="form-control"
+                placeholder="Enter quantity"
+                value={form.quantity}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label>Unit</label>
-        <select name="unit" value={form.unit} onChange={handleChange} required>
-          <option value="">Select unit</option>
-          <option value="kg">Kg</option>
-          <option value="liter">Liter</option>
-          <option value="piece">Piece</option>
-          <option value="packet">Packet</option>
-          <option value="box">Box</option>
-        </select>
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Unit</label>
+              <select
+                name="unit"
+                className="form-select"
+                value={form.unit}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select unit</option>
+                <option value="kg">Kg</option>
+                <option value="liter">Liter</option>
+                <option value="piece">Piece</option>
+                <option value="packet">Packet</option>
+                <option value="box">Box</option>
+              </select>
+            </div>
 
-        <label>Price BCN</label>
-        <input
-          name="price_BCN"
-          value={form.price_BCN}
-          placeholder="Price BCN"
-          onChange={handleChange}
-        />
-                <label>Owner Id</label>
-        <input
-          name="owner_id"
-          value={form.owner_id}
-          placeholder="Owner id"
-          onChange={handleChange}
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Price BCN</label>
+              <input
+                name="price_BCN"
+                className="form-control"
+                placeholder="Optional BCN price"
+                value={form.price_BCN}
+                onChange={handleChange}
+              />
+            </div>
 
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Owner ID</label>
+              <input
+                name="owner_id"
+                className="form-control"
+                placeholder="Enter owner ID"
+                value={form.owner_id}
+                onChange={handleChange}
+              />
+            </div>
 
-        <label>Register Date</label>
-        <input
-          name="register"
-          type="date"
-          value={form.register}
-          onChange={handleChange}
-          required
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Register Date</label>
+              <input
+                name="register"
+                type="date"
+                className="form-control"
+                value={form.register}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <label>Expiry Date</label>
-        <input
-          name="expiry"
-          type="date"
-          value={form.expiry}
-          onChange={handleChange}
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Expiry Date</label>
+              <input
+                name="expiry"
+                type="date"
+                className="form-control"
+                value={form.expiry}
+                onChange={handleChange}
+              />
+            </div>
 
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={form.description}
-          placeholder="Description"
-          onChange={handleChange}
-        />
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Owner Name</label>
+              <input
+                name="owner_name"
+                className="form-control"
+                placeholder="Enter owner name"
+                value={form.owner_name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-      <label>Owner Name</label>
-        <input
-          name="owner_name"
-          value={form.owner_name}
-          placeholder="Owner Name"
-          onChange={handleChange}
-          required
-        />
-        <label>Product Image</label>
-        <input
-          type="file"
-          name="image"
-          onChange={handleImageChange}
-          accept="image/*"
-          required
-        />
+            <div className="col-12 mb-3">
+              <label className="form-label">Description</label>
+              <textarea
+                name="description"
+                className="form-control"
+                placeholder="Enter product description"
+                value={form.description}
+                onChange={handleChange}
+                rows={3}
+              />
+            </div>
 
-        <button type="submit">Add Product</button>
-      </form>
+            <div className="col-md-6 mb-4">
+              <label className="form-label">Product Image</label>
+              <input
+                type="file"
+                name="image"
+                className="form-control"
+                onChange={handleImageChange}
+                accept="image/*"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100">
+            Add Product
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
