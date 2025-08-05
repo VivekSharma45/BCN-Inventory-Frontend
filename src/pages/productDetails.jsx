@@ -1,58 +1,145 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Owner from "../../../server/models/owner";
 
 const ProductDetails = () => {
-  const { id } = useParams(); // owner_id
-  const [products, setProducts] = useState([]);
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/byowner/${id}`)
+    fetch(`http://localhost:5000/api/products/details/${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          setProducts(data.products);
+          setProduct(data.product);
         }
       })
-      .catch(err => console.error("Error fetching owner products:", err));
+      .catch(err => console.error("Error fetching product:", err));
   }, [id]);
 
+  if (!product) {
+    return <div className="text-center py-5 text-white bg-dark">Loading product...</div>;
+  }
+
+  const images = Array.isArray(product.image) ? product.image : [product.image];
+  const currentImage = images[currentImageIndex];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <div className="container py-4">
-      <h2 className="text-center mb-4 text-primary">📦 Products Details</h2>
+    <div className="py-5" style={{ background: "linear-gradient(to right, #e0f7fa, #e8f5e9)" }}>
+      <div className="container">
+        <h2 className="text-center mb-5 text-primary display-5 fw-semibold">📦 Product Details</h2>
 
-      <div className="row">
-        {products.length === 0 ? (
-          <div className="col-12 text-center">
-            <div className="alert alert-info">No products found for this owner.</div>
-          </div>
-        ) : (
-          products.map(product => (
-            <div key={product._id} className="col-md-6 col-lg-4 mb-4">
-              <div className="card h-100 shadow-sm">
-                {product.image && (
-                  <img
-                    src={`http://localhost:5000/upload/${product.image}`}
-                    className="card-img-top"
-                    alt={product.name}
-                    style={{ objectFit: "cover", height: "200px" }}
-                  />
+        <div className="row justify-content-center">
+          <div className="col-md-10 col-lg-8">
+            <div className="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+              {/* Image Carousel */}
+              <div className="position-relative bg-white p-3 border-bottom text-center">
+
+                {/* Left Arrow */}
+                {images.length > 1 && (
+                  <button
+                    className="btn btn-light position-absolute top-50 start-0 translate-middle-y"
+                    style={{
+                      zIndex: 1,
+                      fontSize: "4rem",
+                    //  width: "50px",
+                      //height: "50px",
+                      //borderRadius: "50%",
+                      //boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+                      paddingBottom:"1px",
+                    }}
+                    onClick={prevImage}
+                  >
+                    ‹
+                  </button>
                 )}
-                <div className="card-body">
-                  <h5 className="card-title text-success">{product.name}</h5>
-                  <p className="card-text"><strong>Price:</strong> ₹{product.price}</p>
-                  <p className="card-text"><strong>Price BCN:</strong> ₹{product.price_BCN}</p>
 
-                  <p className="card-text"><strong>Quantity:</strong> {product.quantity}</p>
-                  <p className="card-text"><strong>Description:</strong> {product.description}</p>
-                  <p className="card-text"><strong>Owner:</strong> {product.owner_name}</p>
+                {/* Center Image */}
+                <div
+                  style={{
+                    height: "300px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <img
+                    src={`http://localhost:5000/upload/${currentImage}`}
+                    alt={`Product ${currentImageIndex + 1}`}
+                    style={{
+                      maxHeight: "100%",
+                      maxWidth: "100%",
+                      objectFit: "contain"
+                    }}
+                  />
+                </div>
 
+                {/* Right Arrow */}
+                {images.length > 1 && (
+                  <button
+                    className="btn btn-light position-absolute top-50 end-0 translate-middle-y"
+                    style={{
+                      zIndex: 1,
+                      fontSize: "4rem",
+                     // width: "50px",
+                     // height: "50px",
+                     // borderRadius: "50%",
+                     // boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                      paddingBottom: "1px",
+                      
+
+                    }}
+                    onClick={nextImage}
+                  >
+                    ›
+                  </button>
+                )}
+
+                {/* Bullet Indicators */}
+                <div className="d-flex justify-content-center mt-3">
+                  {images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      style={{
+                        height: "12px",
+                        width: "12px",
+                        margin: "0 6px",
+                        backgroundColor: currentImageIndex === idx ? "#007bff" : "#ccc",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        transition: "background-color 0.3s"
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
+
+              {/* Product Info */}
+              <div className="card-body bg-light">
+                <h3 className="card-title text-success fw-bold">{product.name}</h3>
+                <hr />
+                <p><strong>💰 Price:</strong> ₹{product.price}</p>
+                <p><strong>📊 Price BCN:</strong> ₹{product.price_BCN}</p>
+                <p><strong>📦 Quantity:</strong> {product.quantity} {product.unit}</p>
+                <p><strong>📝 Description:</strong> {product.description}</p>
+                <p><strong>🏢 Owner:</strong> {product.owner_name || product.owner_id?.company_name}</p>
+                <p><strong>📅 Expiry:</strong> {product.expiry ? new Date(product.expiry).toLocaleDateString() : 'N/A'}</p>
+              </div>
+
             </div>
-          ))
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );

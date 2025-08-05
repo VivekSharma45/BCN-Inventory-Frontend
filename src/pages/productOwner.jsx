@@ -7,13 +7,12 @@ const ProductOwner = () => {
     company_name: '',
     owner_name: '',
     phone: '',
-    product: '',
-    owner_id: '',
+    gst: '',
     register: ''
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/owner")
+    axios.get("http://localhost:5000/api/owner/all")
       .then((res) => {
         console.log("Owners fetched:", res.data.owners);
       })
@@ -84,17 +83,6 @@ const ProductOwner = () => {
               />
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Owner ID</label>
-              <input
-                type="text"
-                name="owner_id"
-                className="form-control"
-                value={formData.owner_id}
-                onChange={handleChange}
-                placeholder="Enter owner ID"
-              />
-            </div>
 
             <div className="mb-3">
               <label className="form-label">Register Date</label>
@@ -109,15 +97,15 @@ const ProductOwner = () => {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Product</label>
+              <label className="form-label">GST Number</label>
               <input
                 type="text"
                 name="product"
                 className="form-control"
                 value={formData.product}
                 onChange={handleChange}
-                placeholder="Enter product name"
-                required
+                placeholder="Enter GST Number"
+            
               />
             </div>
 
