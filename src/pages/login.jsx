@@ -36,6 +36,14 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
+       <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/ownerList")}>🧑‍💼 Owners</button>
+        </div>
+      </div>
       <div className="row justify-content-center">
         <div className="col-md-6 col-lg-5">
           <div className="card shadow p-4">

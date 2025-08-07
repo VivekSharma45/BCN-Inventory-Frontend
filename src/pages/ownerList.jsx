@@ -49,6 +49,14 @@ const OwnerList = () => {
 
   return (
     <div className="container mt-4">
+       <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
       <h3 className="mb-3">Owner List</h3>
       {owners.length > 0 ? (
         <table className="table table-hover table-striped">

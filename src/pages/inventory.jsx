@@ -99,7 +99,7 @@ const Inventory = () => {
             <tr>
               <th style={{ width: '50px' }}>#</th>
               <th>Product Name</th>
-              <th>Quantity</th>
+              <th>Total Number of Items</th>
               <th style={{ width: '120px' }}>Action</th>
             </tr>
           </thead>
@@ -115,7 +115,7 @@ const Inventory = () => {
                   >
                     {getProductSymbol(prod.name)} {capitalizeFirstLetter(prod.name)}
                   </td>
-                  <td>{prod.quantity} {prod.unit || ''}</td>
+                  <td>{prod.product_quantity} </td>
                   <td>
                     <button
                       className="btn btn-sm btn-danger"

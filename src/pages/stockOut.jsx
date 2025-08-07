@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
 
 const StockOut = () => {
   const [formData, setFormData] = useState({
@@ -8,9 +9,10 @@ const StockOut = () => {
     quantity: "",
     unit: "",
     note: "",
+    product_quantity: "",
   });
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,7 +22,7 @@ const StockOut = () => {
         type: "out",
       });
       alert("✅ Stock Out Successfully");
-      setFormData({ product_id: "", quantity: "", unit: "", note: "" });
+      setFormData({ product_id: "", quantity: "", unit: "", note: "", product_quantity: "" });
     } catch (error) {
       console.error("Stock Out Failed");
       alert("❌ Stock Out Failed");
@@ -32,8 +34,18 @@ const StockOut = () => {
   return (
     <div className="container mt-5">
       <div className="card shadow-sm">
-        <div className="card-header bg-danger text-white">
-          <h4 className="mb-0">📦 Stock Out Entry</h4>
+        <div className="card-header bg-info text-danger">
+
+           <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-dark"> Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-warning" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
+
+          <h3 className="mb-0  align-items-center" >📦 Stock Out Entry</h3>
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit}>
@@ -53,6 +65,23 @@ const StockOut = () => {
                 required
               />
             </div>
+                        <div className="mb-3">
+              <label htmlFor="product_quantity" className="form-label">
+                Total Number of Items
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="product_quantity"
+                min="1"
+                value={formData.product_quantity}
+                onChange={(e) =>
+                  setFormData({ ...formData, product_quantity: e.target.value })
+                }
+                required
+              />
+            </div>
+
 
             {/* Quantity */}
             <div className="mb-3">

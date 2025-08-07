@@ -35,6 +35,14 @@ const OwnerProducts = () => {
 
   return (
     <div className="container mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
       <h4>
         Products by:{' '}
         <span className="text-primary">
@@ -50,6 +58,7 @@ const OwnerProducts = () => {
             <tr>
               <th>#</th>
               <th>Product</th>
+             <th>Total No. Of Items</th>
               <th>Qty</th>
               <th>Unit</th>
               <th>Price</th>
@@ -65,6 +74,7 @@ const OwnerProducts = () => {
                 >
                   <td>{idx + 1}</td>
                   <td>{prod.name}</td>
+                  <td>{prod.product_quantity}</td>
                   <td>{prod.quantity}</td>
                   <td>{prod.unit}</td>
                   <td>{prod.price}</td>

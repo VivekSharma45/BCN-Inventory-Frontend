@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const StockIn = () => {
   const [formData, setFormData] = useState({
     product_id: "",
     quantity: "",
     unit: "",
-    note: ""
+    note: "",
+    product_quantity: "",
   });
 
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,7 +22,7 @@ const StockIn = () => {
         type: "in"
       });
       alert("✅ Stock In Successfully");
-      setFormData({ product_id: "", quantity: "", unit: "", note: "" });
+      setFormData({ product_id: "", quantity: "", unit: "", note: "" , product_quantity: ""});
     } catch (error) {
       console.error("Stock In Failed", error);
       alert("❌ Stock In Failed");
@@ -35,6 +37,16 @@ const StockIn = () => {
         <div className="col-lg-8">
           <div className="card shadow-lg border-0">
             <div className="card-body">
+         <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-warning" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
+      
+
               <h3 className="card-title mb-4 text-center text-primary">
                 📦 Stock In Entry
               </h3>
@@ -53,6 +65,21 @@ const StockIn = () => {
                     required
                   />
                 </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label fw-bold">📦 Total Number of Items</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      placeholder="Enter number of items"
+                      value={formData.product_quantity}
+                      onChange={(e) =>
+                        setFormData({ ...formData, product_quantity: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+
 
                 <div className="row">
                   <div className="col-md-6 mb-3">

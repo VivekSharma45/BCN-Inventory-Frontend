@@ -31,10 +31,12 @@ const Home = () => {
         setLowStockCount(lowStockRes.data.products.length);
 
         const stockInRes = await axios.get('http://localhost:5000/api/stock/all');
-        setStockInCount(stockInRes.data.stockIns.length);
+        const filteredStockIns = stockInRes.data.stockIns.filter(item => item.product_id);
+        setStockInCount(filteredStockIns.length);
 
         const stockOutRes = await axios.get('http://localhost:5000/api/stock/allStockOut');
-        setStockOutCount(stockOutRes.data.stockOuts.length);
+        const filteredStockOuts = stockOutRes.data.stockOuts.filter(item => item.product_id);
+        setStockOutCount(filteredStockOuts.length);
 
         const ownerRes = await axios.get('http://localhost:5000/api/owner/all');
         if (ownerRes.data.success) {
@@ -87,8 +89,6 @@ const Home = () => {
           <div className="col-md-2 mb-4">
             <div className="list-group">
               {[
-               // { path: '/login', label: 'Login', color: 'dark' },
-               // { path: '/register', label: 'Register', color: 'secondary' },
                 { path: '/add-product', label: 'Add Product', color: 'success' },
                 { path: '/productOwner', label: 'Add Owner', color: 'info' },
                 { path: '/inventory', label: 'Inventory', color: 'primary' },
@@ -143,7 +143,7 @@ const Home = () => {
                           <tr>
                             <th>#</th>
                             <th>Product Name</th>
-                            <th>Quantity</th>
+                            <th>Total Number of Items</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -156,7 +156,7 @@ const Home = () => {
                               <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{product.name}</td>
-                                <td>{product.quantity}</td>
+                                <td>{product.product_quantity}</td>
                               </tr>
                             ))
                           )}

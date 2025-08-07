@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
 
 const ProductOwner = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const ProductOwner = () => {
     gst: '',
     register: ''
   });
-
+const navigate = useNavigate();
   useEffect(() => {
     axios.get("http://localhost:5000/api/owner/all")
       .then((res) => {
@@ -39,6 +40,15 @@ const ProductOwner = () => {
     <div className="container mt-5">
       <div className="card shadow-lg">
         <div className="card-header bg-primary text-white">
+     <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-warning" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
+
           <h3 className="mb-0">Add Product Owner</h3>
         </div>
         <div className="card-body">

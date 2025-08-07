@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
 
 const LowStockItems = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [threshold, setThreshold] = useState(10);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchLowStockItems();
   }, [threshold]);
@@ -24,6 +25,14 @@ const LowStockItems = () => {
 
   return (
     <div className="container mt-5">
+       <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/ownerList")}>🧑‍💼 Owners</button>
+        </div>
+      </div>
       <h2 className="text-center mb-4 text-danger">🔻 Low Stock Items</h2>
 
 
@@ -44,7 +53,7 @@ const LowStockItems = () => {
                 <th>Quantity</th>
                 <th>Price (₹)</th>
                 <th>Expiry Date</th>
-                <th>Owner ID</th>
+                {/* <th>Owner ID</th> */}
               </tr>
             </thead>
             <tbody>
@@ -52,12 +61,12 @@ const LowStockItems = () => {
                 <tr key={item._id}>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  <td className={item.quantity < threshold ? "text-danger fw-bold" : ""}>
-                    {item.quantity}
+                  <td className={item.product_quantity < threshold ? "text-danger fw-bold" : ""}>
+                    {item.product_quantity}
                   </td>
                   <td>{item.price}</td>
                   <td>{item.expiry ? new Date(item.expiry).toLocaleDateString() : "N/A"}</td>
-                  <td>{item.owner_id}</td>
+                  {/* <td>{item.owner_id}</td> */}
                 </tr>
               ))}
             </tbody>

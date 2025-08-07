@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const AddProduct = () => {
   const [form, setForm] = useState({
@@ -13,12 +14,14 @@ const AddProduct = () => {
     description: "",
     owner_name: "",
     owner_id: "",
+    product_quantity: "",
   });
 
   const [images, setImages] = useState([]);
   const [previewURLs, setPreviewURLs] = useState([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [owners, setOwners] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -67,6 +70,16 @@ const AddProduct = () => {
 
   return (
     <div className="container mt-4">
+<div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory System</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          {/* <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button> */}
+          <button className="btn btn-warning" onClick={() => navigate("/ownerList")}>🧑‍💼 Owners</button>
+        </div>
+      </div>
+
+
       <h4>Add Product</h4>
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -82,6 +95,11 @@ const AddProduct = () => {
             <label className="form-label fw-semibold">Price</label>
             <input type="number" name="price" className="form-control" required onChange={handleChange} />
           </div>
+                    <div className="col-md-6">
+            <label className="form-label fw-semibold">Total Number of Items</label>
+            <input type="number" name="product_quantity" className="form-control" required onChange={handleChange} />
+          </div>
+
 
           {/* Quantity */}
           <div className="col-md-6">

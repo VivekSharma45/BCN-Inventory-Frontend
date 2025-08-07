@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:5000/api/products/details/${id}`)
       .then(res => res.json())
@@ -36,6 +38,15 @@ const ProductDetails = () => {
   return (
     <div className="py-5" style={{ background: "linear-gradient(to right, #e0f7fa, #e8f5e9)" }}>
       <div className="container">
+<div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold text-primary">📦 Inventory Products</h2>
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
+          <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button>
+          <button className="btn btn-warning" onClick={() => navigate("/productOwner")}>➕ Add Owner</button>
+        </div>
+      </div>
+
         <h2 className="text-center mb-5 text-primary display-5 fw-semibold">📦 Product Details</h2>
 
         <div className="row justify-content-center">
