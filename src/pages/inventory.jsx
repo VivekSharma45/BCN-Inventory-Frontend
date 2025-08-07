@@ -9,7 +9,7 @@ const Inventory = () => {
 
   // ✅ Fetch all products
   const fetchProducts = () => {
-    fetch('http://localhost:5000/api/products')
+    fetch('https://bcn-inventory-backend.vercel.app/api/products')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -29,7 +29,7 @@ const Inventory = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        const res = await axios.delete(`http://localhost:5000/api/products/delete/${id}`);
+        const res = await axios.delete(`https://bcn-inventory-backend.vercel.app/api/products/delete/${id}`);
         if (res.data.success) {
           alert("Product deleted successfully");
           fetchProducts(); // refresh list

@@ -10,7 +10,7 @@ const StockOutList = () => {
   useEffect(() => {
     const fetchStockOut = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/stock/allStockOut');
+        const response = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/allStockOut');
         setStockOuts(response.data?.stockOuts || []);
       } catch (error) {
         console.error('Error fetching stock out data:', error);

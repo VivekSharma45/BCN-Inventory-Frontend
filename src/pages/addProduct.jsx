@@ -25,7 +25,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/owner/all")
+      .get("https://bcn-inventory-backend.vercel.app/api/owner/all")
       .then((res) => {
         if (res.data.success) setOwners(res.data.owners);
       })
@@ -60,7 +60,7 @@ const AddProduct = () => {
     images.forEach((img) => formData.append("image", img));
 
     try {
-      const res = await axios.post("http://localhost:5000/api/products/create", formData);
+      const res = await axios.post("https://bcn-inventory-backend.vercel.app/api/products/create", formData);
       alert("Product added successfully!");
     } catch (err) {
       console.error(err);

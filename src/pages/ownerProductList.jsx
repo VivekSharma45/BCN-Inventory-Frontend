@@ -12,7 +12,7 @@ const OwnerProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/products/byowner/${id}`);
+        const res = await axios.get(`https://bcn-inventory-backend.vercel.app/api/products/byowner/${id}`);
         if (res.data.success) {
           setProducts(res.data.products);
         }

@@ -19,7 +19,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/owners", form);
+      await axios.post("https://bcn-inventory-backend.vercel.app/api/owners", form);
       alert("Owner registered successfully");
     } catch (err) {
       console.error("Error registering owner:", err);

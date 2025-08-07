@@ -33,7 +33,7 @@ const OwnerList = () => {
   const handleDelete = async (owner_id) => {
     if (window.confirm("Are you sure you want to delete this owner?")) {
       try {
-        const res = await axios.delete(`http://localhost:5000/api/owner/deleted/${owner_id}`);
+        const res = await axios.delete(`https://bcn-inventory-backend.vercel.app/api/owner/deleted/${owner_id}`);
         if (res.data.success) {
           alert("Owner deleted successfully");
           fetchOwners(); // Refresh the list

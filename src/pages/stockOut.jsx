@@ -17,7 +17,7 @@ const StockOut = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/stock/out", {
+      await axios.post("https://bcn-inventory-backend.vercel.app/api/stock/out", {
         ...formData,
         type: "out",
       });

@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/details/${id}`)
+    fetch(`https://bcn-inventory-backend.vercel.app/api/products/details/${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -85,7 +85,7 @@ const ProductDetails = () => {
                   }}
                 >
                   <img
-                    src={`http://localhost:5000/upload/${currentImage}`}
+                    src={`https://bcn-inventory-backend.vercel.app/upload/${currentImage}`}
                     alt={`Product ${currentImageIndex + 1}`}
                     style={{
                       maxHeight: "100%",

@@ -21,24 +21,24 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsRes = await axios.get('http://localhost:5000/api/products');
+        const productsRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/products');
         const allProducts = productsRes.data.products || [];
         setProductCount(allProducts.length);
         setLatestProducts(allProducts.slice(-5).reverse());
 
         const threshold = 10;
-        const lowStockRes = await axios.get(`http://localhost:5000/api/stock/low?threshold=${threshold}`);
+        const lowStockRes = await axios.get(`https://bcn-inventory-backend.vercel.app/api/stock/low?threshold=${threshold}`);
         setLowStockCount(lowStockRes.data.products.length);
 
-        const stockInRes = await axios.get('http://localhost:5000/api/stock/all');
+        const stockInRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/all');
         const filteredStockIns = stockInRes.data.stockIns.filter(item => item.product_id);
         setStockInCount(filteredStockIns.length);
 
-        const stockOutRes = await axios.get('http://localhost:5000/api/stock/allStockOut');
+        const stockOutRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/allStockOut');
         const filteredStockOuts = stockOutRes.data.stockOuts.filter(item => item.product_id);
         setStockOutCount(filteredStockOuts.length);
 
-        const ownerRes = await axios.get('http://localhost:5000/api/owner/all');
+        const ownerRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/owner/all');
         if (ownerRes.data.success) {
           const sortedOwners = ownerRes.data.owners.sort((a, b) =>
             (a.owner_name || "").localeCompare(b.owner_name || "")
@@ -70,12 +70,6 @@ const Home = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <Link to="/" className="navbar-brand fs-3">📦 Inventory Dashboard</Link>
-        </div>
-      </nav>
-
       <div className="bg-primary text-white text-center py-5">
         <div className="container">
           <h1 className="display-4 fw-bold">Smart Inventory Management System</h1>

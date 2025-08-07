@@ -14,7 +14,7 @@ const LowStockItems = () => {
 
   const fetchLowStockItems = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/stock/low?threshold=${threshold}`);
+      const res = await axios.get(`https://bcn-inventory-backend.vercel.app/api/stock/low?threshold=${threshold}`);
       setProducts(res.data.products); // Ensure backend sends { products: [...] }
       setLoading(false);
     } catch (error) {
