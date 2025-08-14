@@ -17,7 +17,7 @@ const StockIn = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("https://bcn-inventory-backend.vercel.app/api/stock/in", {
+      await axios.post("https://bcn-inventory-backend.onrender.com/api/stock/in", {
         ...formData,
         type: "in"
       });

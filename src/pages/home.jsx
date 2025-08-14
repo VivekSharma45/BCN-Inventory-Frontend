@@ -21,24 +21,24 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/products');
+        const productsRes = await axios.get('https://bcn-inventory-backend.onrender.com/api/products');
         const allProducts = productsRes.data.products || [];
         setProductCount(allProducts.length);
         setLatestProducts(allProducts.slice(-5).reverse());
 
         const threshold = 10;
-        const lowStockRes = await axios.get(`https://bcn-inventory-backend.vercel.app/api/stock/low?threshold=${threshold}`);
+        const lowStockRes = await axios.get(`https://bcn-inventory-backend.onrender.com/api/stock/low?threshold=${threshold}`);
         setLowStockCount(lowStockRes.data.products.length);
 
-        const stockInRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/all');
+        const stockInRes = await axios.get('https://bcn-inventory-backend.onrender.com/api/stock/all');
         const filteredStockIns = stockInRes.data.stockIns.filter(item => item.product_id);
         setStockInCount(filteredStockIns.length);
 
-        const stockOutRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/allStockOut');
+        const stockOutRes = await axios.get('https://bcn-inventory-backend.onrender.com/api/stock/allStockOut');
         const filteredStockOuts = stockOutRes.data.stockOuts.filter(item => item.product_id);
         setStockOutCount(filteredStockOuts.length);
 
-        const ownerRes = await axios.get('https://bcn-inventory-backend.vercel.app/api/owner/all');
+        const ownerRes = await axios.get('https://bcn-inventory-backend.onrender.com/api/owner/all');
         if (ownerRes.data.success) {
           const sortedOwners = ownerRes.data.owners.sort((a, b) =>
             (a.owner_name || "").localeCompare(b.owner_name || "")

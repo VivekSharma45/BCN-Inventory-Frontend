@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`https://bcn-inventory-backend.vercel.app/api/products/details/${id}`)
+    fetch(`https://bcn-inventory-backend.onrender.com/api/products/details/${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {

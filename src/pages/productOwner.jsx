@@ -13,7 +13,7 @@ const ProductOwner = () => {
   });
 const navigate = useNavigate();
   useEffect(() => {
-    axios.get("https://bcn-inventory-backend.vercel.app/api/owner/all")
+    axios.get("https://bcn-inventory-backend.onrender.com/api/owner/all")
       .then((res) => {
         console.log("Owners fetched:", res.data.owners);
       })
@@ -28,7 +28,7 @@ const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://bcn-inventory-backend.vercel.app/api/owner/create", formData);
+      await axios.post("https://bcn-inventory-backend.onrender.com/api/owner/create", formData);
       alert("✅ Owner added successfully");
     } catch (err) {
       console.error("❌ Error adding Owner:", err);

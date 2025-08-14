@@ -9,7 +9,7 @@ const StockInList = () => {
   useEffect(() => {
     const fetchStockIn = async () => {
       try {
-        const response = await axios.get('https://bcn-inventory-backend.vercel.app/api/stock/all');
+        const response = await axios.get('https://bcn-inventory-backend.onrender.com/api/stock/all');
         setStockIns(response.data.stockIns);
       } catch (error) {
         console.error('Error fetching stock in data:', error);
