@@ -11,7 +11,7 @@ const OwnerList = () => {
   }, []);
 
   const fetchOwners = () => {
-    axios.get('http://localhost:5000/api/owner/all')
+    axios.get('https://bcn-inventory-backend.onrender.com/api/owner/all')
       .then((res) => {
         if (res.data.success && Array.isArray(res.data.owners)) {
           setOwners(res.data.owners);
