@@ -56,7 +56,7 @@ const StockOutList = () => {
                 .map((item, index) => (
                   <tr key={item._id || index}>
                     <td>{item.product_id.name}</td>
-                    <td>{item.quantity}</td>
+                    <td>{item.product_quantity || item.quantity}</td>
                     <td>{item.date ? new Date(item.date).toLocaleDateString() : "N/A"}</td>
                   </tr>
                 ))
