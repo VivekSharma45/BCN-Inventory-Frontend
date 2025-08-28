@@ -105,13 +105,13 @@ const AddProduct = () => {
           {/* Quantity */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Measurment</label>
-            <input type="number" name="quantity" className="form-control" required onChange={handleChange} />
+            <input type="number" name="quantity" className="form-control"  onChange={handleChange} />
           </div>
 
           {/* Unit */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Unit</label>
-            <select name="unit" className="form-select" required value={form.unit} onChange={handleChange}>
+            <select name="unit" className="form-select" value={form.unit} onChange={handleChange}>
               <option value="">Select Unit</option>
               <option value="kg">kg</option>
               <option value="liter">Liter</option>
@@ -124,7 +124,7 @@ const AddProduct = () => {
           {/* Price BCN */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Price (BCN)</label>
-            <input type="number" name="price_BCN" className="form-control" onChange={handleChange} required />
+            <input type="number" name="price_BCN" className="form-control" onChange={handleChange}/>
           </div>
 
           {/* Register Date */}
@@ -136,7 +136,7 @@ const AddProduct = () => {
           {/* Expiry Date */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Expiry Date</label>
-            <input type="date" name="expiry" className="form-control" onChange={handleChange} required />
+            <input type="date" name="expiry" className="form-control" onChange={handleChange} />
           </div>
 
           {/* Select Owner */}
