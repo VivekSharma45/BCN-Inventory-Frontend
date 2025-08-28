@@ -22,6 +22,8 @@ const StockOut = () => {
         type: "out",
       });
       alert("✅ Stock Out Successfully");
+       window.location.reload();
+
       setFormData({ product_id: "", quantity: "", unit: "", note: "", product_quantity: "" });
     } catch (error) {
       console.error("Stock Out Failed");

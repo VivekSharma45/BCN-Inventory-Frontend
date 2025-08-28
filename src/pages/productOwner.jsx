@@ -30,6 +30,8 @@ const navigate = useNavigate();
     try {
       await axios.post("https://bcn-inventory-backend.onrender.com/api/owner/create", formData);
       alert("✅ Owner added successfully");
+      window.location.reload();
+
     } catch (err) {
       console.error("❌ Error adding Owner:", err);
       alert("Failed to add product");

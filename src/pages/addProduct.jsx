@@ -62,6 +62,7 @@ const AddProduct = () => {
     try {
       const res = await axios.post("https://bcn-inventory-backend.onrender.com/api/products/create", formData);
       alert("Product added successfully!");
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert("Error while adding product.");
