@@ -42,7 +42,7 @@ const StockInList = () => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Product Name</th>
-                  <th scope="col">Quantity In</th>
+                  <th scope="col">Product In</th>
                   <th scope="col">Date</th>
                 </tr>
               </thead>
@@ -60,7 +60,7 @@ const StockInList = () => {
                         </td>
                         <td>
                           <span className="badge bg-success">
-                            {item.quantity}
+                            {item.product_quantity || item.quantity}
                           </span>
                         </td>
                         <td>{new Date(item.date).toLocaleDateString()}</td>
