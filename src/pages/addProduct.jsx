@@ -71,15 +71,13 @@ const AddProduct = () => {
 
   return (
     <div className="container mt-4">
-<div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold text-primary">📦 Inventory System</h2>
         <div className="btn-group">
           <button className="btn btn-primary" onClick={() => navigate("/")}>🏠 Home</button>
-          {/* <button className="btn btn-success" onClick={() => navigate("/add-product")}>➕ Add Product</button> */}
           <button className="btn btn-warning" onClick={() => navigate("/ownerList")}>🧑‍💼 Owners</button>
         </div>
       </div>
-
 
       <h4>Add Product</h4>
 
@@ -96,22 +94,23 @@ const AddProduct = () => {
             <label className="form-label fw-semibold">Price</label>
             <input type="number" name="price" className="form-control" required onChange={handleChange} />
           </div>
-                    <div className="col-md-6">
+
+          {/* Total Items */}
+          <div className="col-md-6">
             <label className="form-label fw-semibold">Total Number of Items</label>
             <input type="number" name="product_quantity" className="form-control" required onChange={handleChange} />
           </div>
 
-
-          {/* Quantity */}
+          {/* Quantity (optional) */}
           <div className="col-md-6">
-            <label className="form-label fw-semibold">Measurment</label>
-            <input type="number" name="quantity" className="form-control" required onChange={handleChange} />
+            <label className="form-label fw-semibold">Measurement</label>
+            <input type="number" name="quantity" className="form-control" onChange={handleChange} />
           </div>
 
-          {/* Unit */}
+          {/* Unit (optional) */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Unit</label>
-            <select name="unit" className="form-select" required value={form.unit} onChange={handleChange}>
+            <select name="unit" className="form-select" value={form.unit} onChange={handleChange}>
               <option value="">Select Unit</option>
               <option value="kg">kg</option>
               <option value="liter">Liter</option>
@@ -133,10 +132,10 @@ const AddProduct = () => {
             <input type="date" name="register" className="form-control" onChange={handleChange} required />
           </div>
 
-          {/* Expiry Date */}
+          {/* Expiry Date (optional) */}
           <div className="col-md-6">
             <label className="form-label fw-semibold">Expiry Date</label>
-            <input type="date" name="expiry" className="form-control" onChange={handleChange} required />
+            <input type="date" name="expiry" className="form-control" onChange={handleChange} />
           </div>
 
           {/* Select Owner */}
@@ -191,63 +190,55 @@ const AddProduct = () => {
           </div>
         </div>
 
-        {/* 👇 Image Previews (Moved Below Upload) */}
-{/* 👇 Image Thumbnails Only (No Big Preview) */}
-{/* 👇 Image Thumbnails with Remove (×) Button */} 
-{previewURLs.length > 0 && (
-  <div
-    className="d-flex overflow-auto gap-2 my-4 px-2"
-    style={{ maxWidth: "100%", scrollbarWidth: "thin" }}
-  >
-    {previewURLs.map((url, i) => (
-      <div
-        key={i}
-        style={{ position: "relative", display: "inline-block" }}
-      >
-        <img
-          src={url}
-          alt={`preview-${i}`}
-          style={{
-            height: "70px",
-            width: "100px",
-            objectFit: "cover",
-            border: "2px solid #ccc",
-            borderRadius: "5px",
-          }}
-        />
-        <button
-          type="button"
-          onClick={() => {
-            const updatedPreviews = previewURLs.filter((_, index) => index !== i);
-            const updatedImages = images.filter((_, index) => index !== i);
-            setPreviewURLs(updatedPreviews);
-            setImages(updatedImages);
-            if (selectedImageIndex >= updatedPreviews.length) {
-              setSelectedImageIndex(0);
-            }
-          }}
-          style={{
-            position: "absolute",
-            top: "-8px",
-            right: "-8px",
-            background: "red",
-            color: "white",
-            border: "none",
-            borderRadius: "50%",
-            width: "20px",
-            height: "20px",
-            cursor: "pointer",
-            fontSize: "12px",
-            lineHeight: "20px",
-            padding: 0,
-          }}
-        >
-          ×
-        </button>
-      </div>
-    ))}
-  </div>
-)}
+        {/* Image Previews */}
+        {previewURLs.length > 0 && (
+          <div className="d-flex overflow-auto gap-2 my-4 px-2" style={{ maxWidth: "100%", scrollbarWidth: "thin" }}>
+            {previewURLs.map((url, i) => (
+              <div key={i} style={{ position: "relative", display: "inline-block" }}>
+                <img
+                  src={url}
+                  alt={`preview-${i}`}
+                  style={{
+                    height: "70px",
+                    width: "100px",
+                    objectFit: "cover",
+                    border: "2px solid #ccc",
+                    borderRadius: "5px",
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updatedPreviews = previewURLs.filter((_, index) => index !== i);
+                    const updatedImages = images.filter((_, index) => index !== i);
+                    setPreviewURLs(updatedPreviews);
+                    setImages(updatedImages);
+                    if (selectedImageIndex >= updatedPreviews.length) {
+                      setSelectedImageIndex(0);
+                    }
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "-8px",
+                    right: "-8px",
+                    background: "red",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "50%",
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    padding: 0,
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Submit Button */}
         <div className="col-12">
