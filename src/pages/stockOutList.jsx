@@ -39,7 +39,7 @@ const StockOutList = () => {
           <thead className="table-dark">
             <tr>
               <th scope="col">Product Name</th>
-              <th scope="col">Quantity Out</th>
+              <th scope="col">Product Out</th>
               <th scope="col">Date</th>
             </tr>
           </thead>
