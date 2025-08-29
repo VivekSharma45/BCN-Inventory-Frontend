@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './pages/home';
@@ -15,14 +15,17 @@ import StockInList from './pages/stockInList';
 import StockOutList from './pages/stockOutList';
 import OwnerList from './pages/ownerList';
 import OwnerProducts from './pages/ownerProductList';
-//import UpdateProduct from './pages/updateProduct';
-//import UpdateProduct from './pages/updateProduct';
+import UpdateProduct from './pages/updateProduct';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Default route redirects to homepage */}
         <Route path="/" element={<Home />} />
+        
+        {/* Main application routes */}
+        <Route path="/home" element={<Home />} />
         <Route path="/ownerList" element={<OwnerList />} />
         <Route path="/productDetails/:id" element={<ProductDetails />} />
         <Route path="/register" element={<Register />} />
@@ -34,15 +37,16 @@ function App() {
         <Route path="/lowStockItems" element={<LowStockItems />} />
         <Route path="/stockInList" element={<StockInList />} />
         <Route path="/stockOutList" element={<StockOutList/>} />
-
-        {/* ✅ FIX: Use correct path for OwnerProduct page */}
         <Route path="/owners/:id/products" element={<OwnerProducts />} />
-
         <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/updateProduct/:id" element={<UpdateProduct />} />
 
         {/* Optional Routes */}
         <Route path="/about" element={<h1>About</h1>} />
         <Route path="/contact" element={<h1>Contact</h1>} />
+        
+        {/* Catch all route - redirect to homepage */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
