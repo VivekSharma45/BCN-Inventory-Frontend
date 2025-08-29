@@ -220,7 +220,7 @@ const Home = () => {
                     </Link>
                     <Link 
                       to="/stockOutList" 
-                      className="btn btn-outline-danger btn-sm text-start d-flex align-items-center gap-2"
+                      className="btn btn-danger btn-sm text-start d-flex align-items-center gap-2"
                       style={{ borderRadius: '10px', fontSize: '0.9rem', padding: '10px 15px' }}
                     >
                       <FaList />
