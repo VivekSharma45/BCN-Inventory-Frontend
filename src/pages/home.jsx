@@ -525,7 +525,7 @@ const Home = () => {
       <footer className="bg-dark text-white text-center py-3 mt-5">
         <div className="container">
           <p className="mb-0">
-            &copy; {new Date().getFullYear()} BCN Inventory System | Developed with ❤️ by Vivek Sharma
+            &copy; {new Date().getFullYear()} BCN Inventory System | Developed by Vivek Sharma❤️
           </p>
         </div>
       </footer>
