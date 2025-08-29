@@ -119,6 +119,11 @@ const ProductDetails = () => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const handleImageError = (e) => {
+    e.target.style.display = 'none';
+    e.target.nextSibling.style.display = 'block';
+  };
+
   return (
     <div className="min-vh-100" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       <div className="container py-3 py-md-5">
@@ -179,7 +184,8 @@ const ProductDetails = () => {
                           width: '40px',
                           height: '40px',
                           borderRadius: '50%',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                          border: 'none',
+                          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                         }}
                         onClick={prevImage}
                       >
@@ -193,7 +199,8 @@ const ProductDetails = () => {
                           width: '40px',
                           height: '40px',
                           borderRadius: '50%',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                          border: 'none',
+                          boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
                         }}
                         onClick={nextImage}
                       >
@@ -202,55 +209,53 @@ const ProductDetails = () => {
                     </>
                   )}
 
-                  {/* Main Image */}
-                  <div className="text-center" style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {currentImage ? (
+                  {/* Image Display */}
+                  <div className="text-center">
+                    {images.length > 0 && currentImage ? (
                       <img
                         src={currentImage}
-                        alt={`Product ${currentImageIndex + 1}`}
+                        alt={`${product.name} - Image ${currentImageIndex + 1}`}
+                        className="img-fluid rounded"
                         style={{
-                          maxHeight: "250px",
-                          maxWidth: "100%",
-                          objectFit: "contain",
-                          borderRadius: '15px',
+                          maxHeight: '400px',
+                          maxWidth: '100%',
+                          objectFit: 'contain',
                           boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
                         }}
-                        onError={(e) => {
-                          console.error('Image failed to load:', currentImage);
-                          e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'block';
-                        }}
+                        onError={handleImageError}
                       />
                     ) : (
-                      <div className="text-muted">
-                        <span style={{ fontSize: '3rem' }}>📷</span>
-                        <p className="mt-3">No image available</p>
+                      <div className="d-flex align-items-center justify-content-center" 
+                           style={{ 
+                             height: '300px', 
+                             backgroundColor: '#f8f9fa',
+                             borderRadius: '10px',
+                             border: '2px dashed #dee2e6'
+                           }}>
+                        <div className="text-center">
+                          <span style={{ fontSize: '4rem', color: '#6c757d' }}>📦</span>
+                          <p className="text-muted mt-2 mb-0">No images available</p>
+                          <small className="text-muted">Product images will appear here</small>
+                        </div>
                       </div>
                     )}
-                    <div className="text-muted" style={{ display: 'none' }}>
-                      <span style={{ fontSize: '3rem' }}>❌</span>
-                      <p className="mt-3">Image failed to load</p>
-                    </div>
                   </div>
 
                   {/* Image Indicators */}
                   {images.length > 1 && (
-                    <div className="d-flex justify-content-center mt-3">
-                      {images.map((_, idx) => (
-                        <div
-                          key={idx}
-                          onClick={() => setCurrentImageIndex(idx)}
-                          style={{
-                            height: "10px",
-                            width: "10px",
-                            margin: "0 4px",
-                            backgroundColor: currentImageIndex === idx ? "#667eea" : "#dee2e6",
-                            borderRadius: "50%",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease"
-                          }}
-                        />
-                      ))}
+                    <div className="text-center mt-3">
+                      <div className="btn-group btn-group-sm">
+                        {images.map((_, index) => (
+                          <button
+                            key={index}
+                            className={`btn ${index === currentImageIndex ? 'btn-primary' : 'btn-outline-primary'}`}
+                            onClick={() => setCurrentImageIndex(index)}
+                            style={{ borderRadius: '50%', width: '12px', height: '12px', padding: 0 }}
+                          >
+                            &nbsp;
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
