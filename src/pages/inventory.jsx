@@ -154,8 +154,8 @@ const Inventory = () => {
           <div className="col-6 col-md-3 mb-3">
             <div className="card border-0 shadow-sm h-100" style={{ borderRadius: '15px' }}>
               <div className="card-body text-center p-3 p-md-4">
-                <div className="mb-2 mb-md-3">
-                  <span style={{ fontSize: '2rem', fontSize: '1.5rem' }}>📊</span>
+                                  <div className="mb-2 mb-md-3"> 
+                    <span style={{ fontSize: '1.5rem' }}>📊</span>
                 </div>
                 <h4 className="fw-bold text-primary mb-1">{products.length}</h4>
                 <p className="text-muted mb-0 small">Total Products</p>

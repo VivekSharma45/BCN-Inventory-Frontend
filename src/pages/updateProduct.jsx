@@ -121,6 +121,7 @@ const UpdateProduct = () => {
       return;
     }
 
+    // Check if we have any images (existing or new)
     if (existingImages.length === 0 && images.length === 0) {
       setError("Please select at least one image.");
       setSubmitting(false);
@@ -131,11 +132,8 @@ const UpdateProduct = () => {
     Object.keys(form).forEach((key) => {
       formData.append(key, form[key]);
     });
-
-    // Add existing images
-    existingImages.forEach((img) => formData.append("existingImages", img));
     
-    // Add new images
+    // Add new images only
     images.forEach((img) => formData.append("image", img));
 
     try {
